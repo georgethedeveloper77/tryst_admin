@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 /// APP INFO CONSTANTS ///
 ///
-const String APP_NAME = "Flutter Dating App Admin Panel";
-const Color APP_PRIMARY_COLOR = Colors.pink;
-const Color APP_ACCENT_COLOR = Colors.pinkAccent;
+const String APP_NAME = "Tryst Admin Panel";
+const Color APP_PRIMARY_COLOR = Colors.purple;
+const Color APP_ACCENT_COLOR = Colors.purpleAccent;
 
 /// FIREBASE MESSAGING TOPIC
 const NOTIFY_USERS = "NOTIFY_USERS";

@@ -69,100 +69,104 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(APP_NAME)),
-      drawer: NavigationDrawer(),
-      backgroundColor: Colors.grey.withAlpha(70),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: _users,
-        builder: (context, snapshot) {
-          // Check data
-          if (!snapshot.hasData) {
-            return Processing();
-          } else {
-            // Variables
-            final List<DocumentSnapshot> users = snapshot.data!.docs;
-            // G
-            final int totalActiveUsers = _countUsers(users, 'active');
-            final int totalVerifiedUsers = _countUsers(users, 'verified');
-            final int totalFlaggedUsers = _countUsers(users, 'flagged');
-            final int totalBlockedUsers = _countUsers(users, 'blocked');
+        appBar: AppBar(
+          title: Text(APP_NAME),
+          centerTitle: true,
+          backgroundColor: Theme.of(context).primaryColor,
+        ),
+        drawer: NavigationDrawer(),
+        backgroundColor: Colors.grey.withAlpha(70),
+        body: StreamBuilder<QuerySnapshot>(
+            stream: _users,
+            builder: (context, snapshot) {
+              // Check data
+              if (!snapshot.hasData) {
+                return Processing();
+              } else {
+                // Variables
+                final List<DocumentSnapshot> users = snapshot.data!.docs;
+                // G
+                final int totalActiveUsers = _countUsers(users, 'active');
+                final int totalVerifiedUsers = _countUsers(users, 'verified');
+                final int totalFlaggedUsers = _countUsers(users, 'flagged');
+                final int totalBlockedUsers = _countUsers(users, 'blocked');
 
-            return SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // Dashboard Header
-                  Center(
-                    child: Container(
-                      width: double.maxFinite,
-                      color: Colors.white,
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        children: [
-                          Icon(Icons.score, size: 80, color: Colors.grey),
-                          Text("Control Panel",
-                              style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold)),
-                          Text("Watch your bussiness growing in real time!",
-                              style: TextStyle(color: Colors.grey)),
-                        ],
+                return SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // Dashboard Header
+                      Center(
+                        child: Container(
+                          width: double.maxFinite,
+                          color: Colors.white,
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            children: [
+                              Icon(Icons.score, size: 80, color: Colors.grey),
+                              Text("Control Panel",
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold)),
+                              Text("Watch your bussiness growing in real time!",
+                                  style: TextStyle(color: Colors.grey)),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
+
+                      // Dashboard Statistics section 01
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            // Total Users
+                            StatisticCard(
+                              iconBgColor: Colors.green,
+                              icon: Icons.person_add_outlined,
+                              total: totalActiveUsers,
+                              description: "Total Active Users",
+                            ),
+
+                            // Total Verified Users
+                            StatisticCard(
+                              iconBgColor: Colors.blue,
+                              icon: Icons.check,
+                              total: totalVerifiedUsers,
+                              description: "Total Verified Users",
+                            ),
+
+                            // Total Flagged Users
+                            StatisticCard(
+                              iconBgColor: Colors.amber,
+                              icon: Icons.flag_outlined,
+                              total: totalFlaggedUsers,
+                              description: "Total Flagged Users",
+                            ),
+
+                            // Total Blocked Users
+                            StatisticCard(
+                              iconBgColor: Colors.red,
+                              icon: Icons.lock_outlined,
+                              total: totalBlockedUsers,
+                              description: "Total Blocked Users",
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      /// Show Pie Chart Statistic
+                      UsersPieChart(
+                        totalUsers: users.length,
+                        totalActiveUsers: totalActiveUsers,
+                        totalVerifiedUsers: totalVerifiedUsers,
+                        totalFlaggedUsers: totalFlaggedUsers,
+                        totalBlockedUsers: totalBlockedUsers,
+                      ),
+                    ],
                   ),
-
-                  // Dashboard Statistics section 01
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        // Total Users
-                        StatisticCard(
-                          iconBgColor: Colors.green,
-                          icon: Icons.person_add_outlined,
-                          total: totalActiveUsers,
-                          description: "Total Active Users",
-                        ),
-
-                        // Total Verified Users
-                        StatisticCard(
-                          iconBgColor: Colors.blue,
-                          icon: Icons.check,
-                          total: totalVerifiedUsers,
-                          description: "Total Verified Users",
-                        ),
-
-                        // Total Flagged Users
-                        StatisticCard(
-                          iconBgColor: Colors.amber,
-                          icon: Icons.flag_outlined,
-                          total: totalFlaggedUsers,
-                          description: "Total Flagged Users",
-                        ),
-
-                        // Total Blocked Users
-                        StatisticCard(
-                          iconBgColor: Colors.red,
-                          icon: Icons.lock_outlined,
-                          total: totalBlockedUsers,
-                          description: "Total Blocked Users",
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  /// Show Pie Chart Statistic
-                  UsersPieChart(
-                    totalUsers: users.length,
-                    totalActiveUsers: totalActiveUsers,
-                    totalVerifiedUsers: totalVerifiedUsers,
-                    totalFlaggedUsers: totalFlaggedUsers,
-                    totalBlockedUsers: totalBlockedUsers,
-                  ),
-                ],
-              ),
-            );
-          }
-      }));
+                );
+              }
+            }));
   }
 }

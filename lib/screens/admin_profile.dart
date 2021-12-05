@@ -30,6 +30,8 @@ class _AdminProfileState extends State<AdminProfile> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Admin Profile"),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       key: _scaffoldKey,
       body: Center(

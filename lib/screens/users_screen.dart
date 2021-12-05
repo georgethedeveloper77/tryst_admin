@@ -23,6 +23,8 @@ class _UsersScreenState extends State<UsersScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("List of Users"),
+        backgroundColor: Theme.of(context).primaryColor,
+        automaticallyImplyLeading: true,centerTitle: true,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(top: 10),
@@ -217,7 +219,7 @@ class UserDataTableSource extends DataTableSource {
     if (userId.length < 10) {
       return userId;
     } else {
-      final newUserId = userId.substring(0,10);
+      final newUserId = userId.substring(0, 10);
       return '$newUserId...';
     }
   }

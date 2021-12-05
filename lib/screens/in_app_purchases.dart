@@ -49,7 +49,10 @@ class _InAppPurchasesState extends State<InAppPurchases> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(title: Text("In-App Purchases")),
+      appBar: AppBar(title: Text("In-App Purchases"),
+        backgroundColor: Theme.of(context).primaryColor,
+        centerTitle: true,
+      ),
       body: ScopedModelDescendant<AppModel>(builder: (context, child, model) {
         return Column(
           children: [

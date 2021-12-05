@@ -49,6 +49,7 @@ class ProfileScreen extends StatelessWidget {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text("User profile"),
+        backgroundColor: Theme.of(context).primaryColor,
         elevation: 0,
         actions: <Widget>[
           /// Actions list

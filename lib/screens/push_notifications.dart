@@ -21,6 +21,8 @@ class _PushNotificationsState extends State<PushNotifications> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Push Notifications"),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       key: _scaffoldKey,
       body: Center(

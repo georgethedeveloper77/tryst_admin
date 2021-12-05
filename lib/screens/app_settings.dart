@@ -106,6 +106,8 @@ class _AppSettingsState extends State<AppSettings> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text("App Settings"),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
